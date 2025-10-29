@@ -8,7 +8,7 @@ import frc.robot.Constants;
 
 
 public class MotorSubsystem extends SubsystemBase{
-    private final TalonFX motor = new TalonFX(Constants.OperatorConstants.TalonDeviceIDNum);
+    private final TalonFX motor = new TalonFX(Constants.MOTOR_ID);
  
 
     public MotorSubsystem(){}
