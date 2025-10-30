@@ -16,7 +16,16 @@ public class PressAndReleaseCommand extends Command{
     }
     @Override
     public void initialize() {
-       while( Controller.configureBindings)
+      motor.startMotorLeftt();
+      motor.stopMotorRight();
+    }
+
+
+
+    @Override
+    public void end(boolean interrupted) {
+        motor.startMotorRight();
+        motor.stopMotorLeft();
     }
 
 
