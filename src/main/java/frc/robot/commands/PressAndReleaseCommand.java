@@ -1,15 +1,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.MotorSubsystem;
 
 
 public class PressAndReleaseCommand extends Command{
 
-   private MotorSubsystem motor;
-   private RobotContainer Controller;
-    
+   private MotorSubsystem motor;    
 
     public PressAndReleaseCommand(MotorSubsystem motor){ 
        this.motor =motor;
