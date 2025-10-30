@@ -10,8 +10,7 @@ import frc.robot.Constants;
 public class MotorSubsystem extends SubsystemBase{
     private final TalonFX motorRight = new TalonFX(Constants.MOTOR_ID);
     private final TalonFX motorLeft = new TalonFX(Constants.MOTOR_ID);
-    public boolean motorRightActive = true;
-    public boolean motorLeftActive = false;
+    
     
  
 
@@ -21,7 +20,7 @@ public class MotorSubsystem extends SubsystemBase{
     public void startMotorRight(){
         motorRight.setVoltage(1);
      
-        
+
 
     }
 
