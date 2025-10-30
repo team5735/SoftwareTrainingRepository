@@ -15,14 +15,14 @@ public class MotorCommand extends Command {
     
     @Override
     public void initialize() {
-        motor.startMotor();
+        motor.startMotorRight();
 
        
     }
 
     @Override
     public void end(boolean interrupted) {
-        motor.endMotor();
+        motor.startMotorRight();
     }
 
 
