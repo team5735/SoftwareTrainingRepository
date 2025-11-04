@@ -8,7 +8,7 @@ import frc.robot.Constants;
 
 public class MotorSubsystem extends SubsystemBase{
     private final TalonFX motorRight = new TalonFX(Constants.MOTOR_ID);
-    private final TalonFX motorLeft = new TalonFX(Constants.MOTOR_ID);
+    private final SparkMax motorLeft = new TalonFX(Constants.MOTOR_ID);
     
     
  
@@ -45,16 +45,6 @@ public class MotorSubsystem extends SubsystemBase{
     }
     
     
-    
-    
-
-
-
-
-
-    
-    
-
 
 
 
