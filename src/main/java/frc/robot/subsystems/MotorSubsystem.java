@@ -16,20 +16,16 @@ public class MotorSubsystem extends SubsystemBase{
     public MotorSubsystem(){}
 
     public void startMotorRight(){
-        motorRight.setVoltage(1);
-     
-
+        motorRight.setVoltage(2);
 
     }
     public void stopMotorRight(){
         motorRight.setVoltage(0);
     }
     public void startMotorLeftt(){
-    
         motorLeft.setVoltage(1);
     }
     public void stopMotorLeft(){
-        
         motorLeft.setVoltage(0);
     }
     
