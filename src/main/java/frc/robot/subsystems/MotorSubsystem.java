@@ -35,7 +35,7 @@ public class MotorSubsystem extends SubsystemBase {
         return startEnd(() -> pull(), () -> stop());
     }
 
-    public Command pushStopComman() {
+    public Command pushStopCommand() {
         return runOnce(() -> push());
     }
 
