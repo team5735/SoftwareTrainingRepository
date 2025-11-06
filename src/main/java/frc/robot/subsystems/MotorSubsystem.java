@@ -6,27 +6,29 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 
 public class MotorSubsystem extends SubsystemBase{
     private final TalonFX motorRight = new TalonFX(Constants.MOTOR_ID_TALONFX);
     private final SparkMax motorLeft = new SparkMax(Constants.MOTOR_ID_SPARKMAX, MotorType.kBrushless);
-    
-    public MotorSubsystem(){}
+    private double triggerVal = new RobotContainer().configureBindings2();
+
+    public MotorSubsystem(){
+       
+    }
 
     public void startMotorRight(){
-        motorRight.setVoltage(1);
+        motorRight.setVoltage(1+triggerVal);
      
-
-
     }
     public void stopMotorRight(){
         motorRight.setVoltage(0);
     }
     public void startMotorLeftt(){
-    
-        motorLeft.setVoltage(1);
+        motorLeft.setVoltage(1+triggerVal);
     }
     public void stopMotorLeft(){
         

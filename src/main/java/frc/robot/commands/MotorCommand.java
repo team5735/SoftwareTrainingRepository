@@ -22,7 +22,7 @@ public class MotorCommand extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        motor.startMotorRight();
+        motor.stopMotorRight();
     }
 
 

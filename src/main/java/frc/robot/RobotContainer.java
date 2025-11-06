@@ -19,6 +19,7 @@ import frc.robot.subsystems.MotorSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+
   public MotorSubsystem motor  = new MotorSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -47,6 +48,16 @@ public class RobotContainer {
     // cancelling on release.
 
     m_driverController.a().whileTrue(new PressAndReleaseCommand(motor));
+
+   
+    
+
+  }
+
+  public double configureBindings2(){
+    double triggerVal = m_driverController.getHID().getRightTriggerAxis();
+
+    return triggerVal;
   }
 
   /**
