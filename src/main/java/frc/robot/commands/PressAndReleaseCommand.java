@@ -9,14 +9,14 @@ public class PressAndReleaseCommand extends Command{
    private MotorSubsystem motor;    
 
     public PressAndReleaseCommand(MotorSubsystem motor){ 
-       this.motor =motor;
+       this.motor = motor;
     }
     @Override
     public void initialize() {
       motor.startMotorLeftt();
       motor.stopMotorRight();
     }
-
+    
 
 
     @Override

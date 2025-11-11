@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.PressAndReleaseCommand;
+import frc.robot.commands.TriggerCommand;
 import frc.robot.subsystems.MotorSubsystem;
 
 /**
@@ -20,11 +21,13 @@ import frc.robot.subsystems.MotorSubsystem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  public MotorSubsystem motor  = new MotorSubsystem();
+  // public TriggerCommand trigger = new TriggerCommand(null);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
+
+  public MotorSubsystem motor = new MotorSubsystem(() -> m_driverController.getHID().getLeftTriggerAxis());
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -49,16 +52,8 @@ public class RobotContainer {
 
     m_driverController.a().whileTrue(new PressAndReleaseCommand(motor));
 
-   
-    
-
   }
 
-  public double configureBindings2(){
-    double triggerVal = m_driverController.getHID().getRightTriggerAxis();
-
-    return triggerVal;
-  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
