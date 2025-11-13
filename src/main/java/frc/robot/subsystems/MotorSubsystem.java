@@ -1,10 +1,5 @@
 package frc.robot.subsystems;
 
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfigurator;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -17,6 +12,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.constants.Constants;
 import frc.robot.constants.MotorSubsystemConstants;
 
@@ -26,7 +22,7 @@ public class MotorSubsystem extends SubsystemBase {
     private final SparkBaseConfig sparkConfig = new SparkMaxConfig().inverted(true);
 
     private final TalonFX talonFX_pull = new TalonFX(Constants.mot2);
-
+    private boolean TalonFXOn;
     public MotorSubsystem() {
         sparkMax_pull.configure(sparkConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
         talonFX_pull.setVoltage(MotorSubsystemConstants.PULL_VOLTS);
@@ -36,7 +32,7 @@ public class MotorSubsystem extends SubsystemBase {
     public void pull() {
         sparkMax_pull.setVoltage(MotorSubsystemConstants.PULL_VOLTS);
         talonFX_pull.setVoltage(MotorSubsystemConstants.STOP_VOLTS);
-
+        TalonFXOn = true;
     }
 
     // public void push() {
@@ -50,4 +46,12 @@ public class MotorSubsystem extends SubsystemBase {
         talonFX_pull.setVoltage(MotorSubsystemConstants.PULL_VOLTS);
 
     }
+    public void setSpeed(double triggerValue){
+            if (TalonFXOn){
+            talonFX_pull.setVoltage(1+ triggerValue);
+           }  
+           else{
+            sparkMax_pull.setVoltage(1+ triggerValue);
+           }
+     }
 }
