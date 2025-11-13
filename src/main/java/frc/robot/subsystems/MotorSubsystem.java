@@ -16,44 +16,41 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.commands.TriggerCommand;
 
-
-public class MotorSubsystem extends SubsystemBase{
+public class MotorSubsystem extends SubsystemBase {
     private final TalonFX motorRight = new TalonFX(Constants.MOTOR_ID_TALONFX);
     private final SparkMax motorLeft = new SparkMax(Constants.MOTOR_ID_SPARKMAX, MotorType.kBrushless);
     private boolean isLeftRunning = false;
-    private DoubleSupplier triggerVal;
+    private DoubleSupplier triggerLambda;
 
-    public MotorSubsystem(DoubleSupplier triggerVal){
-        this.triggerVal = triggerVal;
+    public MotorSubsystem(DoubleSupplier triggerLambda) {
+        this.triggerLambda = triggerLambda;
     }
 
-    public void startMotorRight(){
+    public void startMotorRight() {
         motorRight.setVoltage(1);
         isLeftRunning = false;
-     
     }
-    public void stopMotorRight(){
+
+    public void stopMotorRight() {
         motorRight.setVoltage(0);
     }
-    public void startMotorLeftt(){
+
+    public void startMotorLeftt() {
         motorLeft.setVoltage(1);
         isLeftRunning = true;
     }
-    public void stopMotorLeft(){
-        
+
+    public void stopMotorLeft() {
         motorLeft.setVoltage(0);
     }
+
     @Override
     public void periodic() {
         if (isLeftRunning) {
-            motorLeft.setVoltage( 1+triggerVal.getAsDouble() );
+            motorLeft.setVoltage(triggerLambda.getAsDouble());
         }
-        if (!isLeftRunning) { 
-            motorRight.setVoltage(1+triggerVal.getAsDouble());
-            
+        if (!isLeftRunning) {
+            motorRight.setVoltage(triggerLambda.getAsDouble());
         }
-
-        
     }
-    
 }
