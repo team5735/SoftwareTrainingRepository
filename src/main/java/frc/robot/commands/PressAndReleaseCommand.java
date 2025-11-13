@@ -13,16 +13,14 @@ public class PressAndReleaseCommand extends Command{
     }
     @Override
     public void initialize() {
-      motor.startMotorLeftt();
-      motor.stopMotorRight();
+      motor.switchToLeftMotor();
     }
     
 
 
     @Override
     public void end(boolean interrupted) {
-        motor.startMotorRight();
-        motor.stopMotorLeft();
+        motor.switchToRightMotor();
     }
 
 

@@ -77,8 +77,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     
     }
-    m_robotContainer.motor.startMotorRight();
-    m_robotContainer.motor.stopMotorLeft();
+
 
   }
 

@@ -1,20 +1,13 @@
 package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
-import java.util.function.Supplier;
-
-import org.ejml.dense.block.decomposition.qr.BlockHouseHolder_DDRB;
 
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
 
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
-import frc.robot.commands.TriggerCommand;
 
 public class MotorSubsystem extends SubsystemBase {
     private final TalonFX motorRight = new TalonFX(Constants.MOTOR_ID_TALONFX);
@@ -26,30 +19,19 @@ public class MotorSubsystem extends SubsystemBase {
         this.triggerLambda = triggerLambda;
     }
 
-    public void startMotorRight() {
-        motorRight.setVoltage(1);
+    public void switchToRightMotor() {
         isLeftRunning = false;
     }
 
-    public void stopMotorRight() {
-        motorRight.setVoltage(0);
-    }
-
-    public void startMotorLeftt() {
-        motorLeft.setVoltage(1);
+    public void switchToLeftMotor() {
         isLeftRunning = true;
-    }
-
-    public void stopMotorLeft() {
-        motorLeft.setVoltage(0);
     }
 
     @Override
     public void periodic() {
         if (isLeftRunning) {
             motorLeft.setVoltage(triggerLambda.getAsDouble());
-        }
-        if (!isLeftRunning) {
+        } else {
             motorRight.setVoltage(triggerLambda.getAsDouble());
         }
     }
