@@ -31,8 +31,10 @@ public class MotorSubsystem extends SubsystemBase {
     public void periodic() {
         if (isLeftRunning) {
             motorLeft.setVoltage(triggerLambda.getAsDouble());
+            motorRight.setVoltage(0);
         } else {
             motorRight.setVoltage(triggerLambda.getAsDouble());
+            motorLeft.setVoltage(0);
         }
     }
 }
