@@ -13,13 +13,13 @@ public class MotorCommand extends Command {
 
     @Override
     public void initialize() {
-        motor.pull();
+    motor.runSpark();
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        motor.stop();
+        motor.runTalon();
     }
 
 }

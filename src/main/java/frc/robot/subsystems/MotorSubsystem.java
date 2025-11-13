@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.function.Supplier;
+
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfigurator;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -23,16 +25,18 @@ public class MotorSubsystem extends SubsystemBase {
 
     private final TalonFX talonFX_pull = new TalonFX(Constants.mot2);
     private boolean TalonFXOn;
-    public MotorSubsystem() {
+    private Supplier<Double> supplier;
+
+    public MotorSubsystem(Supplier<Double> supplier) {
         sparkMax_pull.configure(sparkConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
         talonFX_pull.setVoltage(MotorSubsystemConstants.PULL_VOLTS);
-
+        this.supplier = supplier;
     }
 
-    public void pull() {
+    public void runSpark() {
         sparkMax_pull.setVoltage(MotorSubsystemConstants.PULL_VOLTS);
         talonFX_pull.setVoltage(MotorSubsystemConstants.STOP_VOLTS);
-        TalonFXOn = true;
+        TalonFXOn = false;
     }
 
     // public void push() {
@@ -41,10 +45,10 @@ public class MotorSubsystem extends SubsystemBase {
 
     // }
 
-    public void stop() {
+    public void runTalon() {
         sparkMax_pull.setVoltage(MotorSubsystemConstants.STOP_VOLTS);
         talonFX_pull.setVoltage(MotorSubsystemConstants.PULL_VOLTS);
-
+    TalonFXOn = true;
     }
     public void setSpeed(double triggerValue){
             if (TalonFXOn){
@@ -53,5 +57,9 @@ public class MotorSubsystem extends SubsystemBase {
            else{
             sparkMax_pull.setVoltage(1+ triggerValue);
            }
+     }
+     @Override
+     public void periodic() {
+         setSpeed(supplier.get());
      }
 }
