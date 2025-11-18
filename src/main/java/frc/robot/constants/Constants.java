@@ -17,6 +17,6 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     
   }
-public static final int sixseven = 67;
-  
+
+  public static final int MOTOR_ID = 11;
 }
