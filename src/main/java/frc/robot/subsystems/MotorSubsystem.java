@@ -25,12 +25,14 @@ public class MotorSubsystem extends SubsystemBase {
 
     private final TalonFX talonFX_pull = new TalonFX(Constants.mot2);
     private boolean TalonFXOn;
-    private Supplier<Double> supplier;
+    private Supplier<Double> supplierL;
+    private Supplier<Double> supplierR;
 
-    public MotorSubsystem(Supplier<Double> supplier) {
+    public MotorSubsystem(Supplier<Double> supplierL, Supplier<Double> supplierR) {
         sparkMax_pull.configure(sparkConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
         talonFX_pull.setVoltage(MotorSubsystemConstants.PULL_VOLTS);
-        this.supplier = supplier;
+        this.supplierL = supplierL;
+        this.supplierR = supplierR;
     }
 
     public void runSpark() {
@@ -48,18 +50,26 @@ public class MotorSubsystem extends SubsystemBase {
     public void runTalon() {
         sparkMax_pull.setVoltage(MotorSubsystemConstants.STOP_VOLTS);
         talonFX_pull.setVoltage(MotorSubsystemConstants.PULL_VOLTS);
-    TalonFXOn = true;
+        TalonFXOn = true;
     }
-    public void setSpeed(double triggerValue){
+    public void setSpeed(double triggerValueR, double triggerValueL){
             if (TalonFXOn){
-            talonFX_pull.setVoltage(1+ triggerValue);
+                if(triggerValueR>0){
+                    talonFX_pull.setVoltage(1);
+                }else if(triggerValueL<0){
+                    talonFX_pull.setVoltage(-1);
+                }
            }  
            else{
-            sparkMax_pull.setVoltage(1+ triggerValue);
+                if(triggerValueR>0){
+                    sparkMax_pull.setVoltage(1);
+                }else if(triggerValueL<0){
+                    sparkMax_pull.setVoltage(-1);
+                }
            }
      }
      @Override
      public void periodic() {
-         setSpeed(supplier.get());
+         setSpeed(supplierR.get(), supplierL.get());
      }
 }
