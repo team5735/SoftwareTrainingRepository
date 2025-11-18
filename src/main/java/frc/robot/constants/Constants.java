@@ -22,4 +22,5 @@ public final class Constants {
 
 
   public static final int FISH = 23;
+  public static final int TALONID = 58;
 }

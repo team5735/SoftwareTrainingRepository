@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 /** An example command that uses an example subsystem. */
 public class MyCommand extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final MySubsystem mysubsystem;
+  private final MySubsystem mySubsystem;
 
   /**
    * Creates a new ExampleCommand.
@@ -19,7 +19,7 @@ public class MyCommand extends Command {
    * @param subsystem The subsystem used by this command.
    */
   public MyCommand(MySubsystem subsystem) {
-    mysubsystem = subsystem;
+    mySubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -27,7 +27,8 @@ public class MyCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-        mysubsystem.clockSpin();
+        mySubsystem.clockSpin();
+        mySubsystem.isPressed = true;
   }
   
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,7 +40,8 @@ public class MyCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-        mysubsystem.stop();
+        mySubsystem.stop();
+        mySubsystem.isPressed = false;
   }
 
   // when isFinished returns true, the scheduler calls end
