@@ -33,15 +33,5 @@ public class MySubsystem extends SubsystemBase {
         motor.setVoltage(0);
     }
 
-    public Command makeClockSpin(){
-        return startEnd(() -> clockSpin(), () -> stop());
-    }
 
-    public Command makeCounterSpin(){
-        return startEnd(() -> counterSpin(), () -> stop());
-    }
-
-    public Command makeStop(){
-        return runOnce(() -> stop());
-    }
 }

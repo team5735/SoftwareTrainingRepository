@@ -21,5 +21,5 @@ public final class Constants {
   }
 
 
-  public static final int FISH = 10;
+  public static final int FISH = 23;
 }
