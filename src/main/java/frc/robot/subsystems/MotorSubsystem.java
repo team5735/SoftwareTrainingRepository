@@ -25,8 +25,7 @@ public class MotorSubsystem extends SubsystemBase {
 
     private final TalonFX talonFX_pull = new TalonFX(Constants.mot2);
     private boolean TalonFXOn;
-    private Supplier<Double> supplierL;
-    private Supplier<Double> supplierR;
+    private Supplier<Double> supplierL, supplierR;
 
     public MotorSubsystem(Supplier<Double> supplierL, Supplier<Double> supplierR) {
         sparkMax_pull.configure(sparkConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
@@ -55,16 +54,16 @@ public class MotorSubsystem extends SubsystemBase {
     public void setSpeed(double triggerValueR, double triggerValueL){
             if (TalonFXOn){
                 if(triggerValueR>0){
-                    talonFX_pull.setVoltage(1);
-                }else if(triggerValueL<0){
-                    talonFX_pull.setVoltage(-1);
+                    talonFX_pull.setVoltage(1+triggerValueR);
+                }else if(triggerValueL>0){
+                    talonFX_pull.setVoltage(-1-triggerValueL);
                 }
            }  
            else{
                 if(triggerValueR>0){
-                    sparkMax_pull.setVoltage(1);
-                }else if(triggerValueL<0){
-                    sparkMax_pull.setVoltage(-1);
+                    sparkMax_pull.setVoltage(1+triggerValueR);
+                }else if(triggerValueL>0){
+                    sparkMax_pull.setVoltage(-1-triggerValueL);
                 }
            }
      }
