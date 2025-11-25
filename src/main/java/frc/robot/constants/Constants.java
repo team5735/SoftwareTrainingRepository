@@ -18,5 +18,6 @@ public final class Constants {
     
   }
 
-  public static final int MOTOR_ID = 23;
+  public static final int SPARK_ID = 23;
+  public static final int TALON_ID = 58;
 }

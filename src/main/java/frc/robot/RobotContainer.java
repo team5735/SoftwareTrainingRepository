@@ -18,7 +18,7 @@ import frc.robot.subsystems.MotorSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final MotorSubsystem moting = new MotorSubsystem();
+  private final MotorSubsystem motors = new MotorSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -46,7 +46,7 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(new MotorCommand(moting));
+    m_driverController.a().whileTrue(new MotorCommand(motors));
   }
 
   /**
