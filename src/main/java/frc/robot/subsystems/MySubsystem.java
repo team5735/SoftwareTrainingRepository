@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.function.Supplier;
+
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -15,13 +17,18 @@ public class MySubsystem extends SubsystemBase {
 
     private final SparkMax motor = new SparkMax(Constants.FISH, MotorType.kBrushless);
     private final TalonFX motor2 = new TalonFX(Constants.TALONID);
+    private boolean sparkMax;
     public boolean isPressed = false;
+    private Supplier<Double> supplier;
 
     private final SparkMaxConfig con = new SparkMaxConfig();
 
-    public MySubsystem() {
+
+
+    public MySubsystem(Supplier<Double> supplier) {
         con.inverted(true);
         motor.configure(con, null, null);
+        this.supplier = supplier;
     }
 
     public void clockSpin(){
@@ -45,6 +52,22 @@ public class MySubsystem extends SubsystemBase {
     public void stop(){
         motor.setVoltage(0);
         motor.setVoltage(0);
+    }
+
+    public void setSpeed(double x){
+        double voltTemp = MySubsystemConstants.VOLTS + x;
+        if(sparkMax){
+            //double voltTemp = MySubsystemConstants.VOLTS + x;
+            motor.setVoltage(voltTemp);
+        } else {
+            //double voltTemp = MySubsystemConstants.VOLTS + x;
+            motor2.setVoltage(voltTemp);
+        }
+    }
+
+    @Override
+    public void periodic(){
+        setSpeed(supplier.get());
     }
 
     
