@@ -20,6 +20,7 @@ public class MySubsystem extends SubsystemBase {
     public boolean isPressed = false;
     private Supplier<Double> supplierRight;
     private Supplier<Double> supplierLeft;
+    boolean spinningClock = true;
 
     private final SparkMaxConfig con = new SparkMaxConfig();
 
@@ -58,21 +59,32 @@ public class MySubsystem extends SubsystemBase {
     public void setSpeed(double x, double y){
         double voltClock = MySubsystemConstants.VOLTS + x;
         double voltCounter = -MySubsystemConstants.VOLTS - y;
-        if(x == 0){
+        double voltSet;
+
+       if(x == 0){
             voltClock = 0;
-        }
+       } else {
+        spinningClock = true;
+       }
         if(y == 0){
             voltCounter = 0;
+        } else {
+            spinningClock = false;
         }
         
+        if(spinningClock == true){
+            voltSet = voltClock;
+        } else {
+            voltSet = voltCounter;
+        }
 
         if(sparkMax){
             //double voltTemp = MySubsystemConstants.VOLTS + x;
-            motor.setVoltage(voltClock + voltCounter);
+            motor.setVoltage(voltSet);
             
         } else {
             //double voltTemp = MySubsystemConstants.VOLTS + x;
-            motor2.setVoltage(voltClock + voltCounter);
+            motor2.setVoltage(voltSet);
         }
     }
 
