@@ -28,7 +28,7 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  private final MySubsystem mySubsystem = new MySubsystem(() -> m_driverController.getRightTriggerAxis());
+  private final MySubsystem mySubsystem = new MySubsystem(() -> m_driverController.getRightTriggerAxis(), () -> m_driverController.getLeftTriggerAxis());
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
