@@ -28,6 +28,7 @@ public class MyCommand extends Command {
   @Override
   public void initialize() {
         mySubsystem.clockSpin();
+        mySubsystem.isPressed = true;
   }
   
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,6 +40,7 @@ public class MyCommand extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+        mySubsystem.isPressed = false;
         mySubsystem.stop();
   }
 
