@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.MotorCommand;
+import frc.robot.constants.Constants;
 import frc.robot.constants.Constants.OperatorConstants;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.MotorSubsystem;
@@ -33,7 +34,7 @@ public class RobotContainer {
 
     // Replace with CommandPS4Controller or CommandJoystick if needed
     private final CommandXboxController m_driverController = new CommandXboxController(
-            OperatorConstants.kDriverControllerPort);
+            Constants.kDriverControllerPort);
     private final MotorSubsystem Motor = new MotorSubsystem(()->m_driverController.getRightTriggerAxis(), ()->m_driverController.getLeftTriggerAxis());
     //private final MotorSubsystem MotorLeftTrigger = new MotorSubsystem();
 
